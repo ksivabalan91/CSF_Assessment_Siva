@@ -32,5 +32,10 @@
       </div>
     </div>
   </form>
+  <div *ngIf="isLoading">
+    <div class="row">
+      <h6 style="color: red;">please wait, files are being uploaded</h6>
+    </div>
+  </div>
 
 </div>

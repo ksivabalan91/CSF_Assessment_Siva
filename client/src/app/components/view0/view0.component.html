@@ -1,10 +1,14 @@
 <div class="row">
-  <h1>Photo Storage</h1>
+  <div class="col">
+    <h1>Photo Storage</h1>
+  </div>
+  <div class="col">
+    <button class="btn btn-primary" [routerLink]="['uploadfile']"> Upload </button>
+  </div>
 </div>
-<div class="row">
-  <button [routerLink]="['uploadfile']"> Upload </button>
-</div>
-<div *ngIf="allBundles ;else nodata" >
+<br>
+
+<div *ngIf="allBundles.length>0 ;else nodata" >
   <div class="row" *ngFor="let bun of allBundles">
     <div class="col"> {{bun.title}} </div>
     <div class="col"> {{getDate(bun.date)}}</div>

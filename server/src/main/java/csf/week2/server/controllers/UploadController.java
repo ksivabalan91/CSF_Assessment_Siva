@@ -19,13 +19,10 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import csf.week2.server.Utils;
 import csf.week2.server.models.Bundle;
 import csf.week2.server.repositories.ArchiveRepository;
 import csf.week2.server.repositories.ImageRepository;
-import csf.week2.server.services.S3Service;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 
@@ -33,9 +30,6 @@ import jakarta.json.JsonObject;
 @RequestMapping
 @CrossOrigin(origins = "*")
 public class UploadController {
-
-    @Autowired
-    private S3Service s3Svc;
 
     @Autowired
     private ArchiveRepository arcRepo;
@@ -55,11 +49,6 @@ public class UploadController {
         @RequestPart String comments
         ) throws IOException {
 
-            System.out.println("zipfile:"+zipFile);
-            System.out.println("name:"+name);
-            System.out.println("title:"+title);
-            System.out.println("comments:"+comments);
-
             //! UNZIP files
             File[] files = Utils.unzip(zipFile);
             List<String> urlList = new LinkedList<>();
@@ -75,7 +64,6 @@ public class UploadController {
                 urlList.add(uri);
             }
 
-            // System.out.println(urlList);           
            //! insert Mongo Record
             String bundleId = arcRepo.recordBundle(title,name,comments,urlList);
 

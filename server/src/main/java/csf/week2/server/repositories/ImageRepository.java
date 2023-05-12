@@ -24,6 +24,7 @@ public class ImageRepository {
 
 	@Value("${DO_STORAGE_BUCKETNAME}")
 	private String bucketName;
+    
 	@Autowired
 	private AmazonS3 s3Client;
 
@@ -66,9 +67,7 @@ public class ImageRepository {
 			.fromUriString("https://"+bucketName+"."+endpoint)
 			.path(fileName)
 			.toUriString();
-			
-			System.out.println("URI:"+uri);
-
+		
             return uri;
 		}
 }

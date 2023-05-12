@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import csf.week2.server.Utils;
 import csf.week2.server.models.Bundle;
 
 @Repository
@@ -24,21 +23,30 @@ public class ArchiveRepository {
 	private final String COLLECTION = "archives";
 
 	//TODO: Task 4
+	// db.archives.insertOne({
+	// 	"date": "2023-05-12T14:37:18.317755",
+	// 	"urls": [
+	// 	  "https://bucketbucket.sgp1.digitaloceanspaces.com/1100021_quarter.jpg",
+	// 	  "https://bucketbucket.sgp1.digitaloceanspaces.com/6a00d8341c464853ef01a3fcaf8688970b.jpg",
+	// 	],
+	// 	"comments": "this is a comment",
+	// 	"bundleId": "790df617",
+	// 	"name": "mando",
+	// 	"title": "delorean"
+	//   })
 	public String recordBundle(String title,String name,String comments,List<String> urlList) {
 		//! generate unique ID
 		String bundleId = UUID.randomUUID().toString().substring(0, 8);
 		String uploadDate = LocalDateTime.now().toString();            
-		String urlArr = Utils.toJsonStr(urlList);
-		System.out.println(urlArr);
 
 		//! insert into archive
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("bundleId", bundleId);
 		map.put("date", uploadDate);
 		map.put("title", title);
 		map.put("name", name);
 		map.put("comments", comments);
-		map.put("urls", urlArr);
+		map.put("urls", urlList);
 		
 		Document doc = new Document(map);
 		template.insert(doc, COLLECTION).toJson();

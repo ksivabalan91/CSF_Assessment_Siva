@@ -16,20 +16,24 @@ export class View1Component implements OnInit {
 
   constructor(private apiSvc:ApiService, private fb: FormBuilder, private router: Router){}
 
+  isLoading = false;
+
   ngOnInit(){
     this.form = this.fb.group({
-      name : this.fb.control<string>('mando',[Validators.required],),
-      title : this.fb.control<string>('delorean',[Validators.required],),
-      comments : this.fb.control<string>('this is a comment'),
+      name : this.fb.control<string>('',[Validators.required],),
+      title : this.fb.control<string>('',[Validators.required],),
+      comments : this.fb.control<string>(''),
       zipFile : this.fb.control('',[Validators.required],)
     })
   }
 
   upload(){
     console.log(this.form,this.zipFileElem)
+    this.isLoading=true;
     this.apiSvc.upload(this.form,this.zipFileElem).subscribe(
       data => {
         console.log(data['bundleId']);
+        this.isLoading=false;
         this.bundleId = data['bundleId'];
         this.router.navigate(['view',this.bundleId])
       },
