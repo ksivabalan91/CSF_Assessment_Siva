@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class View1Component implements OnInit {
   form!: FormGroup;
+  bundleId = ''
 
   @ViewChild('file',{static:true}) zipFileElem!: ElementRef;
 
@@ -26,14 +27,17 @@ export class View1Component implements OnInit {
 
   upload(){
     console.log(this.form,this.zipFileElem)
-    this.apiSvc.upload(this.form,this.zipFileElem);
-  }
-  isVaild(){
-    return this.form.valid;
-  }
-  isUploaded(){
-    return true;
-  }
+    this.apiSvc.upload(this.form,this.zipFileElem).subscribe(
+      data => {
+        console.log(data['bundleId']);
+        this.bundleId = data['bundleId'];
+        this.router.navigate(['view',this.bundleId])
+      },
+      error => {
+        return "error";
+      }
+    )
 
+  }
 
 }

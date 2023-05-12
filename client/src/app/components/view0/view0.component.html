@@ -1,5 +1,20 @@
-<h1>Photo Storage</h1>
-<button [routerLink]="['uploadfile']"> Upload </button>
-<ul>
-  <li>List</li>
-</ul>
+<div class="row">
+  <h1>Photo Storage</h1>
+</div>
+<div class="row">
+  <button [routerLink]="['uploadfile']"> Upload </button>
+</div>
+<div *ngIf="allBundles ;else nodata" >
+  <div class="row" *ngFor="let bun of allBundles">
+    <div class="col"> {{bun.title}} </div>
+    <div class="col"> {{getDate(bun.date)}}</div>
+  </div>
+</div>
+
+<ng-template #nodata>
+  <div class="row">
+    <div class="col">
+      <h4>No pictures uploaded</h4>
+    </div>
+  </div>
+</ng-template>

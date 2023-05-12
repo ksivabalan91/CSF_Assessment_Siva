@@ -5,12 +5,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.amazonaws.services.s3.AmazonS3;
@@ -63,11 +61,13 @@ public class ImageRepository {
             //! Execute the request
             s3Client.putObject(putReq);
 			System.out.println("uploaded:"+fileName);
-
+			
 			String uri = UriComponentsBuilder
-				.fromUriString("https://"+bucketName+"."+endpoint)
-				.path(fileName)
-				.toUriString();
+			.fromUriString("https://"+bucketName+"."+endpoint)
+			.path(fileName)
+			.toUriString();
+			
+			System.out.println("URI:"+uri);
 
             return uri;
 		}

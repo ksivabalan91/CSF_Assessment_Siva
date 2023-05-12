@@ -1,1 +1,19 @@
-<p>view2 works!</p>
+<div class="container">
+  <div class="row">
+    <h3>{{bundleinfo.title}}</h3>
+  </div>
+  <div class="row">
+    <h6>by {{bundleinfo.name}} on {{getDate(bundleinfo.date)}}</h6>
+  </div>
+  <div class="row">
+    <p>{{bundleinfo.comments}}</p>
+  </div>
+  <div class="row">
+    <div class="col" *ngFor="let img of bundleinfo.urls">
+      <img [src]="img.substring(1,img.length-1)" width="200px">
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" type="button" [routerLink]="['/uploadfile']">back</button>
+  </div>
+</div>
