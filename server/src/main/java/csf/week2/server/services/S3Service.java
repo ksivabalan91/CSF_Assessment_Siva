@@ -44,7 +44,9 @@ public class S3Service {
 
     public String upload(
         MultipartFile file,
-         String comments
+        String name,
+        String title,
+        String comments
          ) throws IOException{
 
             //! display file data

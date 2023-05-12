@@ -6,10 +6,17 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { View1Component } from './components/view1/view1.component';
+import { View0Component } from './components/view0/view0.component';
+import { View2Component } from './components/view2/view2.component';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    View1Component,
+    View0Component,
+    View2Component
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
