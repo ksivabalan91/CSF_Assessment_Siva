@@ -10,6 +10,8 @@ import { View1Component } from './components/view1/view1.component';
 import { View0Component } from './components/view0/view0.component';
 import { View2Component } from './components/view2/view2.component';
 import { ApiService } from './services/api.service';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { ApiService } from './services/api.service';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    LottieModule.forRoot({player:()=>player}),
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),

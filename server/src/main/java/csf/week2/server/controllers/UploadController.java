@@ -62,6 +62,7 @@ public class UploadController {
                 String contentType = "image/"+fileExt[fileExt.length-1];
                 String uri = imgRepo.upload(fileInputStream,fileSize,contentType,fileName, name, title, comments);
                 urlList.add(uri);
+                file.delete();
             }
 
            //! insert Mongo Record

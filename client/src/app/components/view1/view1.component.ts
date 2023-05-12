@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AnimationOptions } from 'ngx-lottie';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -17,8 +18,12 @@ export class View1Component implements OnInit {
   constructor(private apiSvc:ApiService, private fb: FormBuilder, private router: Router){}
 
   isLoading = false;
+  options !: AnimationOptions
 
   ngOnInit(){
+    this.options = {
+      path:'/assets/3010-bb8.json'
+    }
     this.form = this.fb.group({
       name : this.fb.control<string>('',[Validators.required],),
       title : this.fb.control<string>('',[Validators.required],),
