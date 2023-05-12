@@ -23,7 +23,7 @@ import jakarta.json.JsonObject;
 @RestController
 @RequestMapping(path="/api")
 @CrossOrigin(origins = "*")
-public class Controller {
+public class PostController {
 
     @Autowired
     private S3Service s3Svc;
