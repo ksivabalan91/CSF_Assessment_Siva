@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { ElementRef, Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { lastValueFrom } from 'rxjs';
 import { Bundle } from '../models/Bundle';
 
 @Injectable({
@@ -9,6 +8,7 @@ import { Bundle } from '../models/Bundle';
 })
 export class ApiService {
 
+  url='https://limber-income-production.up.railway.app'
 
   constructor(private http: HttpClient) { }
 
@@ -26,15 +26,15 @@ export class ApiService {
     formdata.set("zipFile",zipFileElem.nativeElement.files[0]);
     // console.log(formdata);
 
-    return this.http.post<any>("/upload",formdata)
+    return this.http.post<any>(this.url+"/upload",formdata)
   }
 
   getBundle(bundleId: string){
-    return this.http.get<Bundle>('/bundle/'+bundleId)
+    return this.http.get<Bundle>(this.url+'/bundle/'+bundleId)
   }
 
   getBundles(){
-    return this.http.get<Bundle[]>('/bundles')
+    return this.http.get<Bundle[]>(this.url+'/bundles')
   }
   getDate(date:string){
     const date_obj = new Date(date);
